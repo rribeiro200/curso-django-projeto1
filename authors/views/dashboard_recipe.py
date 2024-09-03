@@ -50,7 +50,7 @@ class DashboardRecipeEdit(View):
         recipe = None
 
         if id is not None:
-            recipe = Recipe.objects.filter(
+            recipe = Recipe.my_manager.filter(
                 is_published=False,
                 author=self.request.user,
                 pk=id,
@@ -103,7 +103,7 @@ class DashboardRecipeEdit(View):
 )
 class DashboardRecipeDelete(DashboardRecipeEdit):
     def get(self, request):
-        raise Http404
+        return Http404()
 
     def post(self, request):
         recipe_id = request.POST.get('id')
